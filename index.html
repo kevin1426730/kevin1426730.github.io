@@ -286,6 +286,44 @@
                     color: #8b949e;
                 }
 
+        .big-download-btn {
+            display: inline-block;
+            background: transparent;
+            color: #58a6ff;
+            padding: 15px 60px;
+            border-radius: 50px;
+            text-decoration: none;
+            font-weight: 600;
+            font-size: 1.2rem;
+            border: 1px solid #58a6ff;
+            transition: all 0.2s;
+            box-shadow: 0 0 10px rgba(88,166,255,0.3);
+            cursor: pointer;
+        }
+
+            .big-download-btn:hover {
+                background: #58a6ff;
+                color: #0d1117;
+                box-shadow: 0 0 20px #58a6ff;
+                transform: scale(1.05);
+            }
+
+        @media (max-width: 600px) {
+            .big-download-btn {
+                padding: 12px 30px;
+                font-size: 1rem;
+                width: 80%;
+            }
+        }
+
+        .download-wrapper .big-download-btn {
+            width: 80%;
+            max-width: 400px;
+            padding: 18px 0;
+            display: inline-block;
+            box-sizing: border-box;
+        }
+
         .tutorial-layout {
             display: flex;
             gap: 2.5rem;
@@ -634,6 +672,9 @@
                 <h3 data-i18n="home_card_source_title">源代码</h3>
                 <p data-i18n="home_card_source_desc">查看C++实现，复制代码</p>
             </div>
+        </div>
+        <div class="download-wrapper" style="text-align: center; margin-top: 30px;">
+            <a onclick="showPage('download'); return false;" class="big-download-btn" data-i18n="navDownload">下载</a>
         </div>
     </div>
     <div id="tutorial" class="page">
@@ -2527,7 +2568,9 @@ int main(int argc,char* argv[])
             document.querySelector('[data-i18n="tutorial_error_example"]').innerText = i18n[lang].tutorial_error_example;
             document.querySelector('[data-i18n="tutorial_code_comment"]').textContent = i18n[lang].tutorial_code_comment;
             document.querySelector('[data-i18n="tutorial_code_spaces_bad"]').textContent = i18n[lang].tutorial_code_spaces_bad;
-            document.querySelector('[data-i18n="navDownload"]').innerText = i18n[lang].navDownload;
+            document.querySelectorAll('[data-i18n="navDownload"]').forEach(el => {
+                el.innerText = i18n[lang].navDownload;
+            });
             document.querySelector('[data-i18n="downloadTitle"]').innerText = i18n[lang].downloadTitle;
             document.querySelector('[data-i18n="downloadWindowsTitle"]').innerText = i18n[lang].downloadWindowsTitle;
             document.querySelector('[data-i18n="downloadWindowsDesc"]').innerText = i18n[lang].downloadWindowsDesc;
