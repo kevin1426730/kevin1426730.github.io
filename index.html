@@ -23,6 +23,11 @@
             padding: 0 20px 20px 20px;
         }
 
+        html {
+            scroll-behavior: smooth;
+            scroll-padding-top: 70px;
+        }
+
         .site-header {
             position: sticky;
             top: 0;
@@ -823,9 +828,8 @@ print arr[0]+arr[1]</code></pre>
                     </table>
                     <p><strong data-i18n="tutorial_expr_example">示例</strong>：</p>
                     <pre><code class="language-kco">a=(3+5)*2
-b=a>10&&a<20
-c=16%3
-d=2^3</code></pre>
+b=a>10&&a<20 c=16%3
+             d=2^3</code></pre>
                 </section>
                 <section id="control" class="markdown-section">
                     <h2 data-i18n="tutorial_control">🔁 流程控制</h2>
@@ -851,10 +855,9 @@ repeat end</code></pre>
                     <h3 data-i18n="tutorial_control_while"><code>while</code> 循环</h3>
                     <p data-i18n="tutorial_control_while_desc"><code>while</code> 后跟条件表达式，条件非 0 时重复执行，以 <code>while end</code> 结束。</p>
                     <pre><code class="language-kco">i=0
-while i<5
-print i
-i=i+1
-while end</code></pre>
+while i<5 print i
+          i=i+1
+          while end</code></pre>
                     <h3 data-i18n="tutorial_control_breakcontinue">循环控制</h3>
                     <ul><li data-i18n="tutorial_control_break"><code>break</code>：立即跳出当前循环。</li><li data-i18n="tutorial_control_continue"><code>continue</code>：跳过本次循环剩余部分。</li></ul>
                 </section>
@@ -2799,7 +2802,11 @@ int main(int argc,char* argv[])
                         continue;
                     }
 
-                    if (line === 'if end' || line === 'else end') {
+                    if (line === 'if end') {
+                        pc++;
+                        continue;
+                    }
+                    if (line === 'else end') {
                         iff = 0;
                         pc++;
                         continue;
@@ -2881,10 +2888,17 @@ int main(int argc,char* argv[])
                         if (cond) {
                             pc++;
                         } else {
+                            let foundElse = false;
                             while (pc < program.length) {
                                 pc++;
                                 let t = program[pc].trim();
-                                if (t === 'if end' || t === 'else') break;
+                                if (t === 'if end') {
+                                    pc++;
+                                    break;
+                                } else if (t === 'else') {
+                                    foundElse = true;
+                                    break;
+                                }
                             }
                             iff = 1;
                         }
